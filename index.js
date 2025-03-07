@@ -63,3 +63,15 @@ module.exports.handler = async (event) => {
 
 
 // zip -r function.zip . 
+
+
+// curl --location 'https://moaeetwhxtm6mrqjiwajvdau2y0mrozx.lambda-url.ap-south-1.on.aws' \
+// --header 'Content-Type: application/json' \
+// --data '{
+//     "userId": "user123",
+//     "connectionId": "HA8VLexWBcwCF4A=",
+//     "domainName": "u9zmb2b462.execute-api.ap-south-1.amazonaws.com",
+//     "message": "Hello Man 11!!",
+//     "stage": "dev",
+//     "sendMessageToConnection": true
+// }'
