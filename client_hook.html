@@ -1,0 +1,28 @@
+useEffect(() => {
+    const userId = 'user123';
+    const websocketUrl = `wss://u9zmb2b462.execute-api.ap-south-1.amazonaws.com/dev/?userId=${userId}`;
+    const socket = new WebSocket(websocketUrl);
+    let pingInterval;
+
+    socket.onopen = (event) => {
+      console.log("socket=====Connected!", {event});
+      // Send a ping message every 9 minutes
+      pingInterval = setInterval(() => {
+          if (socket.readyState === WebSocket.OPEN) {
+              socket.send(JSON.stringify({ action: "ping" }));
+              console.log("socket=====Sent ping to keep connection alive");
+          }
+      }, 540000); // 9 minutes (9 * 60 * 1000 ms)
+    };
+
+    socket.send(JSON.stringify({ action: "getAllMessages" }));
+
+    socket.onmessage = (event) => {
+        console.log("socket=====Message received:", event.data);
+    };
+
+    socket.onclose = () => {
+        console.log("socket=====Disconnected");
+        clearInterval(pingInterval);
+    };
+  }, []);
